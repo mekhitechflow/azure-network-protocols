@@ -23,7 +23,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 </p>
 
 <p>
-<img src="https://i.imgur.com/7tpCnwV.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="1279" alt="Screenshot 2024-09-02 at 10 56 30 PM" src="https://github.com/user-attachments/assets/20e10b18-766d-4e0d-9a42-c9667e1f9dba">
 </p>
 <br />
 
@@ -32,11 +32,11 @@ Next, we are going to create a continuous ping between VM1 and VM2 using the com
 </p>
 
 <p>
-<img src="https://i.imgur.com/pPrNsBP.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="1110" alt="Screenshot 2024-09-02 at 11 06 25 PM" src="https://github.com/user-attachments/assets/e11c2cf0-3c10-494e-945b-e091e5e3ef3c">
 </p>
 
 <p>
-<img src="https://i.imgur.com/KaePIyl.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="1276" alt="Screenshot 2024-09-02 at 11 06 51 PM" src="https://github.com/user-attachments/assets/ed6be711-32e2-4504-9951-6071aae45ae7">
 </p>
 <br />
 
@@ -54,7 +54,7 @@ Furthermore, now we are going to dive into DHCP protocol. DHCP stands for Dynami
 </p>
 
 <p>
-<img src="https://i.imgur.com/2vpksrG.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="1325" alt="Screenshot 2024-09-02 at 11 27 48 PM" src="https://github.com/user-attachments/assets/eed1aa93-5e86-43e5-ba44-93f2ae0a1a68">
 </p>
 <br />
 
@@ -72,6 +72,6 @@ Lastly, we will filter the last protocol of this tutorial which is RDP (Remote D
 </p>
 
 <p>
-<img src="https://i.imgur.com/suvmD07.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="1398" alt="Screenshot 2024-09-02 at 11 36 19 PM" src="https://github.com/user-attachments/assets/772b0ea0-52fc-46ce-a14c-a24be52f1e6a">
 </p>
 <br />
