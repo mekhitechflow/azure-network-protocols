@@ -45,7 +45,7 @@ The next protocol we will filter is SSH, SSH or Secure Shell, is a network proto
 </p>
 
 <p>
-<img src="https://i.imgur.com/uZ723ty.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+![ssh](https://github.com/user-attachments/assets/67f7cc4d-023a-4211-b04d-65061fc0a554)
 </p>
 <br />
 
@@ -63,7 +63,7 @@ The next protocol we will see traffic for is DNS. Domain Name System, it's a sys
 </p>
 
 <p>
-<img src="https://i.imgur.com/H1rnFxo.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+![dns](https://github.com/user-attachments/assets/fbb0a288-1c3f-4f91-b0f3-5eba349d65bf)
 </p>
 <br />
 
