@@ -1,67 +1,76 @@
-![image](https://github.com/JasonDelahoussaye/Virtual_Private_Network_VPN_IP_Address_Observations/assets/106440235/8feba822-22ed-4a5b-a709-b4383184314e)
+<p align="center">
+<img src="https://i.imgur.com/Ua7udoS.png" alt="Traffic Examination"/>
+</p>
+
+<h1>Network Security Groups (NSGs) and Inspecting Traffic Between Azure Virtual Machines</h1>
+In this tutorial, we observe various network traffic to and from Azure Virtual Machines with Wireshark as well as experiment with Network Security Groups. <br />
 
 
-<h1>Observing the Effect of a VPN on IP Addressing</h1>
-In this project, I observed the impact of a virtual private network (VPN) on IP address, location, and web browsing.  The video will guide you visually through the steps involved and then further on there are some notes and screenshots provided for highlights of some or all of the material.<br />
 
-<h2>Video Demonstration</h2>
 
-- COMING SOON...
-  
 <h2>Environments and Technologies Used</h2>
 
 - Microsoft Azure (Virtual Machines)
--	Remote Desktop
--	ProtonVPN (free version)
+- Remote Desktop
+- Various Command-Line Tools
+- Various Network Protocols (SSH, RDH, DNS, HTTP/S, ICMP)
+- Wireshark (Protocol Analyzer)
 
-
-<h2>Operating System Used </h2>
+<h2>Operating Systems Used </h2>
 
 - Windows 10 (21H2)
+- Ubuntu Server 20.04
 
-# Lab Tutorial: Setting Up VPN in an Azure Virtual Machine
+<h2>Actions and Observations</h2>
 
-## Objective
-Gain a better understanding of VPNs by setting up a Virtual Private Network inside an Azure virtual machine. This lab will explore the impact of VPNs on IP addresses and locations.
-
-## Step-by-Step Guide
-
-1. Start by accessing the website "whatismyipaddress.com" on your actual PC. Take note of your public IP address and the corresponding city.
-
-2. Create a virtual machine in Azure and establish a connection to it using Remote Desktop Protocol (RDP). This connection bridges your PC and the Azure virtual machine.
-
-3. Within the Azure virtual machine, visit the website "whatismyipaddress.com" once again. This time, note down the new IP address and location. It should differ from your actual PC's IP address.
-
-4. Sign up for the free version of ProtonVPN on your PC. Download and install the ProtonVPN client.
-
-5. Inside the Azure virtual machine, connect to a ProtonVPN server located in Japan (or another available country). This establishes a VPN connection between the virtual machine and the chosen ProtonVPN server.
-
-6. Access the website "whatismyipaddress.com" again from within the Azure virtual machine, with the VPN active. Take note of the new IP address and location displayed. This IP address should reflect the location of the VPN server (e.g., Tokyo, Japan).
-
-By following these steps, you will have three entries in your text file representing different IP addresses and locations:
-
-1. IP address and location from your actual PC without using a VPN.
-
-![image](https://github.com/JasonDelahoussaye/Virtual_Private_Network_VPN_IP_Address_Observations/assets/106440235/a4b5720e-b589-4d32-b1bb-3b9d8faf0a15)
-[Screenshot Here: PC IP Address]
-
-4. IP address and location from the Azure virtual machine without using a VPN.
-
-![image](https://github.com/JasonDelahoussaye/Virtual_Private_Network_VPN_IP_Address_Observations/assets/106440235/0ffe175a-a0f2-47d8-a8e2-44105126c42b)
-[Screenshot Here: Azure VM IP Address]
-
-6. IP address and location from the Azure virtual machine with the VPN connected to a ProtonVPN server in Japan.
-
-![image](https://github.com/JasonDelahoussaye/Virtual_Private_Network_VPN_IP_Address_Observations/assets/106440235/cca59671-88f4-490d-892c-6dd93d5c5974)
-[Screenshot Here: VPN IP Address]
-
-## Understanding the Results
-
-From this exercise, you can observe the following:
-
-- When accessing the website from your actual PC without a VPN, it shows your original IP address and your city location.
-
-- After connecting to the Azure virtual machine and accessing the website, a different IP address and the location of the virtual machine (e.g., Paris) are displayed.
+<p>
+</p>
+<p>
+Welcome to my tutorial on Network Security Groups and Inspecting Network Protocols. First you will need to create two VMs on Azure. One machine will be a Linux machine and the other will be a Windows 10 machine. Both will have two cpus and they must be on the same VNET. Once that is done go on the Windows machine and download Wireshark. I will attatch a link to the wireshark download. https://www.wireshark.org/download.html Once installed open Wireshark and filter for ICMP Traffic only. ICMP is a network layer protocol that relays messages concerning network connection issues. Ping uses this protocol, ping tests connectivity between hosts. When we filter wirehsark to only capture ICMP packets and ping the private IP address of our linux machine we can visually see the packets on wireshark. 
+</p>
+<br />
+<p>
+<img src="https://i.imgur.com/IIUShxp.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+We can inspect each individual packet and see the actual data that is being sent in each ping. the picture below demonstrates just that. 
+</p>
+<br />
+<p>
+<img src="https://i.imgur.com/GLxSIG3.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+In the next portion of the lab we will perpetually ping the Linux machine with the command ping -t. This will continually ping the machine until we decide to stop it, while the Windows machine is pinging the Linux machine we will go to the Linux machine and block inbound ICMP traffic on it's firewall. Once we do that we will stop recieving echo replys from the Linux machine. We will block ICMP by creating a new Network Security Group on the Linux machine that will be set to block ICMP. We can allow the traffic by allowing ICMP on the Linux Network Security Groups page on Azure. 
+</p>
+<br />
+<img src="https://i.imgur.com/5vXO75R.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<img src="https://i.imgur.com/Asl80tN.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<p>
+Next we will use our Windows machine to SSH to the Linux machine. SSH has no GUI it just gives the user access to the machines CLI. We will set the wireshark filter to capture SSH packets only. When we ssh into the Linux machine with the command prompt "ssh labuser@10.0.0.5" we can see that wireshark starts to immediately capture SSH packets.
+</p>
+<br />
+<img src="https://i.imgur.com/zteR41r.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Now we will use wireshark to filter for DHCP. DHCP is the Dynamic Host Configuration Protocol this works on ports 67/68. It is used to assign IP addresses to machines. We will request a new ip address with the command "ipconfig /renew". Once we enter the command wireshark will capture DHCP traffic.
+</p>
+<br />
+<img src="https://i.imgur.com/vU8fpQf.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Time to filter DNS traffic. We will set wireshark to filter DNS traffic. We will initiate DNS traffic by typing in the command "nslookup www.google.com" this command essentially asks our DNS server what is google's IP address.
+</p>
+<br />
+<img src="https://i.imgur.com/VMcwmsO.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Lastly we will filter for RDP traffic. When we enter tcp.port==3389 traffic is spammed non stop because we are using Remote Desktop Protocol to connect to our Virtual Machine. 
+</p>
+<br />
+<img src="https://i.imgur.com/VxXGv6X.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
 
 - Finally, by connecting to the ProtonVPN server in Japan from within the virtual machine and accessing the website again, another IP address and the location of the VPN server (e.g., Tokyo, Japan) are shown.
 
